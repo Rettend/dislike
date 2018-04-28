@@ -75,7 +75,6 @@ class Information:
                 await ctx.send(page)
 
     @commands.command(aliases=["ri","role"], no_pm=True)
-    @commands.guild_only()
     async def roleinfo(self, ctx, *, role: discord.Role):
         '''Shows information about a role'''
         guild = ctx.guild
@@ -162,7 +161,6 @@ class Information:
                 await ctx.send(icon)
 
     @commands.command(aliases=['server','si','svi'], no_pm=True)
-    @commands.guild_only()
     async def serverinfo(self, ctx, server_id : int=None):
         '''See information about the server.'''
         server = self.bot.get_server(id=server_id) or ctx.guild
@@ -222,7 +220,6 @@ class Information:
                 await ctx.send(f'```{e}```')
 
     @commands.command(aliases=['ui'], no_pm=True)
-    @commands.guild_only()
     async def userinfo(self, ctx, *, member : discord.Member=None):
         '''Get information about a member of a server'''
         server = ctx.guild
