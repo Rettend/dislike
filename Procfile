@@ -1,1 +1,1 @@
-worker: python Dislike.py
+worker: python DislikeBot.py
