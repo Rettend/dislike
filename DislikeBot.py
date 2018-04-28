@@ -28,3 +28,26 @@ async def on_message(message):
     if message.content.startswith('r-say'):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
+bot.process_commands(message)
+
+
+
+
+    
+    
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+token = os.environ.get('DISCORD_TOKEN')
+bot.run(token)
