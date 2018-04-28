@@ -32,7 +32,6 @@ async def on_message(message):
 
 @bot.command()
 async def game(play):
-    message = discord.Message
     list = message.content(" ")
     play = " ".join(list[1:])
     await bot.change_presence(game=discord.Game(name=play))
