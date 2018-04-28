@@ -9,7 +9,6 @@ import datetime
 import traceback
 import os
 import sys
-from ext import embedtobox
 import psutil
 import random
 import pip
