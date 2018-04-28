@@ -34,7 +34,7 @@ async def on_message(message):
 async def game(play):
     list = []
     list.append(play)
-    await bot.change_presence(game=discord.Game(name=list))
+    await bot.change_presence(game=discord.Game(name=play))
     await bot.say(f"**Game-status changed to {play}!**")
 
 @bot.command(pass_context=True)
