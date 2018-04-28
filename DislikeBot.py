@@ -11,7 +11,7 @@ import os
 import sys
 
 description = "The Offical bot of Like-Server!"
-bot = commands.Bot(command_prefix='r-', description=description)
+bot = commands.Bot(command_prefix='d-', description=description)
 message = discord.Message
 
 @bot.event
@@ -25,7 +25,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if message.content.startswith('r-say'):
+    if message.content.startswith('d-say'):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
 bot.process_commands(message)
