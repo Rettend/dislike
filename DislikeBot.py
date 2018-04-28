@@ -9,7 +9,6 @@ import datetime
 import traceback
 import os
 import sys
-import logging
 
 description = "The Offical bot of Like-Server!"
 bot = commands.Bot(command_prefix='d-', description=description)
@@ -31,23 +30,15 @@ async def on_message(message):
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
 bot.process_commands(message)
 
-log = logging.getLogger('LOG')
-class Moderation:
 
-    def __init__(self, bot):
-        self.bot = bot
 
-    @bot.command(aliases=['Reactions'])
-    async def reactions(self, ctx, search: int = None):
-        if search:
-            async for message in ctx.message.channel.history(limit=search):
-                await message.clear_reactions()
-            await edit(ctx, content=f"\N{HEAVY CHECK MARK} Cleaned the last {search} Messages", ttl=5)
-        else:
-            await edit(ctx, content="\N{HEAVY EXCLAMATION MARK SYMBOL} Don't forget to give the amount you wanna delte", ttl=5)
-                
-def setup(bot):
-    bot.add_cog(Moderation(bot))
+@bot.command()
+async def react(search: int = None):
+    if search:
+        async for message in bot.channel.history(limit=search):
+            await bot.clear_reactions()
+        await bot.send_message(message.channel, f":heavy_check_mark: **Cleaned the last {search} Messages**")
+
 
 
 
