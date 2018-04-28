@@ -30,37 +30,10 @@ async def on_message(message):
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
 bot.process_commands(message)
 
-
-class Game:
-
-    __slots__ = ['name', 'type', 'url']
-
-    def __init__(self, **kwargs):
-        self.name = kwargs.get('name')
-        self.url = kwargs.get('url')
-        self.type = kwargs.get('type', 0)
-
-    def __str__(self):
-        return self.name
-
-    def _iterator(self):
-        for attr in self.__slots__:
-            value = getattr(self, attr, None)
-            if value is not None:
-                yield (attr, value)
-
-    def __iter__(self):
-        return self._iterator()
-
-    def __eq__(self, other):
-        return isinstance(other, Game) and other.name == self.name
-
-    def __ne__(self, other):
-        return not self.__eq__(other)
-
-    def __hash__(self):
-        return hash(self.name)
-
+@bot.command()
+async def game(play):
+    await bot.change_presence(game=discord.Game(name=play))
+    await bot.send_message(message.channel, f"**Game-status changed to {play}!**")
 
 
 
