@@ -23,6 +23,21 @@ async def on_ready():
     print(discord.utils.oauth_url(bot.user.id))
     await bot.change_presence(game=discord.Game(name='-Alpha version-'))
 
+    def dispatch_error(self, error, ctx):
+        try:
+            coro = self.on_error
+        except AttributeError:
+            pass
+        else:
+            loop = ctx.bot.loop
+            injected = inject_context(ctx, coro)
+            if self.instance is not None:
+                discord.compat.create_task(injected(self.instance, error, ctx), loop=loop)
+            else:
+                discord.compat.create_task(injected(error, ctx), loop=loop)
+        finally:
+            ctx.bot.dispatch('command_error', error, ctx)
+
 @bot.event
 async def on_message(message):
     if message.content.startswith('d-say'):
@@ -30,10 +45,11 @@ async def on_message(message):
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
     await bot.process_commands(message)
     if message.content.startswith('d-disable'):
-        role = await bot.utils.get(server.roles, id=439868272347709440)
+        role = await discord.utils.get(server.roles, id=439868272347709440)
         await bot.add_roles(message.author, role)
         await bot.send_message(message.channel, "**NSFW is disabled for you! ;)**")
     elif message.content.startswith('d-enable'):
+        role = await discord.utils.get(server.roles, id=439868272347709440)
         await bot.remove_roles(message.author, role)
         await bot.send_message(message.channel, "**NSFW is enabled for you! ;)**")
 
