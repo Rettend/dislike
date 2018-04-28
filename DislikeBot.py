@@ -32,14 +32,16 @@ async def on_message(message):
 
 @bot.command()
 async def game(play):
-    list = message.content.split(" ")
+    message = discord.Message
+    list = message.content(" ")
     play = " ".join(list[1:])
     await bot.change_presence(game=discord.Game(name=play))
     em = discord.Embed(title="Game-Status", description=f"Game-status changed to __{play}__!", colour=0xe74c3c)
     await bot.send_message(message.channel, embed=em)
 
-@bot.command(pass_context=True)
-async def joined_at(member: discord.Member = None):
+@bot.command()
+async def joined_at(member):
+    member = discord.Member = None
     if member is None:
         member = message.author
     await bot.say('{0} joined at {0.joined_at}'.format(member))
