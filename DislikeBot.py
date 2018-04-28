@@ -28,13 +28,19 @@ async def on_message(message):
     if message.content.startswith('d-say'):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
-await bot.process_commands(message)
+    await bot.process_commands(message)
 
 @bot.command()
 async def game(play):
     await bot.change_presence(game=discord.Game(name=play))
     await bot.send_message(message.channel, f"**Game-status changed to {play}!**")
 
+@bot.command(pass_context=True)
+async def joined_at(ctx, member: discord.Member = None):
+    if member is None:
+        member = ctx.message.author
+
+    await bot.say('{0} joined at {0.joined_at}'.format(member))
 
 
 
