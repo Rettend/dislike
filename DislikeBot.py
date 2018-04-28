@@ -31,14 +31,35 @@ async def on_message(message):
 bot.process_commands(message)
 
 
+class Game:
 
-@bot.command()
-async def react(search: int = None):
-    if search:
-        async for message in bot.channel.history(limit=search):
-            await bot.clear_reactions()
-        await bot.send_message(message.channel, f":heavy_check_mark: **Cleaned the last {search} Messages**")
+    __slots__ = ['name', 'type', 'url']
 
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name')
+        self.url = kwargs.get('url')
+        self.type = kwargs.get('type', 0)
+
+    def __str__(self):
+        return self.name
+
+    def _iterator(self):
+        for attr in self.__slots__:
+            value = getattr(self, attr, None)
+            if value is not None:
+                yield (attr, value)
+
+    def __iter__(self):
+        return self._iterator()
+
+    def __eq__(self, other):
+        return isinstance(other, Game) and other.name == self.name
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        return hash(self.name)
 
 
 
