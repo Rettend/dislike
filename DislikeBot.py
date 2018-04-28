@@ -29,11 +29,18 @@ async def on_message(message):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
     await bot.process_commands(message)
+    if message.content.startswith('d-disable'):
+        role = await bot.utils.get(server.roles, id=439868272347709440)
+        await bot.add_roles(message.author, role)
+        await bot.send_message(message.channel, "**NSFW is disabled for you! ;)**")
+    elif message.content.startswith('d-enable'):
+        await bot.remove_roles(message.author, role)
+        await bot.send_message(message.channel, "**NSFW is enabled for you! ;)**")
 
 @bot.command()
 async def game(play):
     await bot.change_presence(game=discord.Game(name=play))
-    em = discord.Embed(title="Game-Status", description=f"Game-status changed to __{play}__!", colour=0xe74c3c)
+    em = discord.Embed(title="Game-Status", description=f"Game-status changed to __{play}__!", colour=0x992d22)
     await bot.say(embed=em)
 
 @bot.command()
@@ -41,7 +48,7 @@ async def joined_at(member):
     member = discord.Member = None
     if member is None:
         member = message.author
-    await bot.say('{0} joined at {0.joined_at}'.format(member))
+    await bot.say(f'{member} joined at {member.joined_at}')
 
 
 
