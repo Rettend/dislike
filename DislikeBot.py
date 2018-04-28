@@ -34,7 +34,7 @@ async def on_message(message):
 async def game(play):
     await bot.change_presence(game=discord.Game(name=play))
     em = discord.Embed(title="Game-Status", description=f"Game-status changed to __{play}__!", colour=0xe74c3c)
-    await bot.send_message(message.channel, embed=em)
+    await bot.say(embed=em)
 
 @bot.command()
 async def joined_at(member):
