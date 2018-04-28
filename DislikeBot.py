@@ -44,16 +44,6 @@ async def on_message(message):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
     await bot.process_commands(message)
-    if message.content.startswith('d-disable'):
-        server = discord.Server
-        role = await discord.utils.get(server.roles, id=439868272347709440)
-        await bot.add_roles(message.author, role)
-        await bot.send_message(message.channel, "**NSFW is disabled for you! ;)**")
-    elif message.content.startswith('d-enable'):
-        server = discord.Server
-        role = await discord.utils.get(server.roles, id=439868272347709440)
-        await bot.remove_roles(message.author, role)
-        await bot.send_message(message.channel, "**NSFW is enabled for you! ;)**")
 
 @bot.command()
 async def game(play):
