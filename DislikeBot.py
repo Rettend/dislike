@@ -58,7 +58,7 @@ async def on_message(message):
 @bot.command()
 async def game(play):
     await bot.change_presence(game=discord.Game(name=play))
-    em = discord.Embed(title="Game-Status", description=f"Game-status changed to __{play}__!", colour=#cc0000)
+    em = discord.Embed(title="Game-Status", description=f"Game-status changed to __{play}__!", colour=0x992d22)
     await bot.say(embed=em)
 
 @bot.command()
