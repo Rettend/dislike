@@ -28,7 +28,7 @@ async def on_message(message):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
     await bot.process_commands(message)
-    if message.content.startswith('d-help'):
+    if message.content.startswith('d-list'):
         em = discord.Embed(title="COMMANDS:", description=":closed_book: d-say (something)\n"
                            ":white_small_square: Repeat what you said\n"
                            "\n"
@@ -38,12 +38,25 @@ async def on_message(message):
                            ":closed_book: d-game (game)\n"
                            ":white_small_square: r: Set a game for the Bot\n"
                            "\n"
-                           ":closed_book: d-help\n"
+                           ":closed_book: d-list\n"
                            ":white_small_square: Show this message", colour=0x992d22)
         em.set_thumbnail(url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         em.set_footer(text="The Official Bot of Like Server, inviting and using the Bot in other servers breaks the Term of Use.", icon_url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         await bot.send_message(message.channel, embed=em)
 
+@bot.command()
+@commands.has_permissions(kick_members)
+async def kick(member, reason):
+    channel = await bot.get_channel(id='439865882789806080')
+    await bot.kick(member)
+    await bot.say(f"**{message.author} kikced {member} for {reason}, cya {member!}**")
+    em = discord.Embed(colour=0x992d22)
+    em.set_author(name=message.author, icon_url=message.author.icon_url)
+    em.set_field(name="User", value=member)
+    em.set_field(name="Moderator", value=message.author)
+    em.set_field(name="Reason", value=reason)
+    await bot.send_message(channel, embed=em)
+        
 @bot.command()
 async def game(play):
     await bot.change_presence(game=discord.Game(name=play))
@@ -55,7 +68,7 @@ async def joined(member):
     member = discord.Member = None
     if member is None:
         member = message.author
-    await bot.say(f'{member} joined at {member.joined_at}')
+    await bot.say(f'**{member} joined at {member.joined_at}**')
 
 
 
