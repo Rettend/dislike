@@ -23,27 +23,25 @@ async def on_ready():
     print(discord.utils.oauth_url(bot.user.id))
     await bot.change_presence(game=discord.Game(name='-Alpha version-'))
 
-    def dispatch_error(self, error, ctx):
-        try:
-            coro = self.on_error
-        except AttributeError:
-            pass
-        else:
-            loop = ctx.bot.loop
-            injected = inject_context(ctx, coro)
-            if self.instance is not None:
-                discord.compat.create_task(injected(self.instance, error, ctx), loop=loop)
-            else:
-                discord.compat.create_task(injected(error, ctx), loop=loop)
-        finally:
-            ctx.bot.dispatch('command_error', error, ctx)
-
 @bot.event
 async def on_message(message):
     if message.content.startswith('d-say'):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
     await bot.process_commands(message)
+    if message.content.startswith('d-help'):
+        em = discord.Embed(title="COMMANDS:", description=":closed_book: d-say (something)\n"
+                           ":closed_book: d-joined (user)\n"
+                           ":eight_pointed_black_star: Show when joined the user in UTC\n"
+                           "\n"
+                           ":closed_book: d-game (game)\n"
+                           ":eight_pointed_black_star: Set a game for the Bot\n"
+                           "\n"
+                           ":closed_book: d-help\n"
+                           ":eight_pointed_black_star: Show this message", colour=0x992d22)
+        em.set_thumbnail(url=https://cdn.discordapp.com/attachments/439712863733415946/440043078422757376/DislikeBot.png)
+        em.set_footer(text="The Official Bot of Like Server, inviting and using the Bot in other servers breaks the Term of Use.", icon_url=https://cdn.discordapp.com/attachments/439712863733415946/440043078422757376/DislikeBot.png)
+        await bot.send_message(message.channel, embed=em)
 
 @bot.command()
 async def game(play):
@@ -52,7 +50,7 @@ async def game(play):
     await bot.say(embed=em)
 
 @bot.command()
-async def joined_at(member):
+async def joined(member):
     member = discord.Member = None
     if member is None:
         member = message.author
