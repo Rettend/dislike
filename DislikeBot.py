@@ -10,8 +10,7 @@ import traceback
 import os
 import sys
 
-description = "The Offical bot of Like-Server!"
-bot = commands.Bot(command_prefix='d-', description=description)
+bot = commands.Bot(command_prefix='d-', description=None)
 message = discord.Message
 
 @bot.event
@@ -31,14 +30,16 @@ async def on_message(message):
     await bot.process_commands(message)
     if message.content.startswith('d-help'):
         em = discord.Embed(title="COMMANDS:", description=":closed_book: d-say (something)\n"
+                           ":white_small_square: Repeat what you said\n"
+                           "\n"
                            ":closed_book: d-joined (user)\n"
-                           ":eight_pointed_black_star: Show when joined the user in UTC\n"
+                           ":white_small_square: Show when joined the user in UTC\n"
                            "\n"
                            ":closed_book: d-game (game)\n"
-                           ":eight_pointed_black_star: Set a game for the Bot\n"
+                           ":white_small_square: r: Set a game for the Bot\n"
                            "\n"
                            ":closed_book: d-help\n"
-                           ":eight_pointed_black_star: Show this message", colour=0x992d22)
+                           ":white_small_square: Show this message", colour=0x992d22)
         em.set_thumbnail(url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         em.set_footer(text="The Official Bot of Like Server, inviting and using the Bot in other servers breaks the Term of Use.", icon_url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         await bot.send_message(message.channel, embed=em)
