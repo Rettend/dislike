@@ -45,7 +45,6 @@ async def on_message(message):
         await bot.send_message(message.channel, embed=em)
 
 @bot.command()
-@commands.has_permissions(discord.Permissions.kick_members)
 async def kick(member, reason):
     message = discord.Message
     channel = await bot.get_channel(id='439865882789806080')
