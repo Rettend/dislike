@@ -39,8 +39,8 @@ async def on_message(message):
                            "\n"
                            ":closed_book: d-help\n"
                            ":eight_pointed_black_star: Show this message", colour=0x992d22)
-        em.set_thumbnail(url=https://cdn.discordapp.com/attachments/439712863733415946/440043078422757376/DislikeBot.png)
-        em.set_footer(text="The Official Bot of Like Server, inviting and using the Bot in other servers breaks the Term of Use.", icon_url=https://cdn.discordapp.com/attachments/439712863733415946/440043078422757376/DislikeBot.png)
+        em.set_thumbnail(url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
+        em.set_footer(text="The Official Bot of Like Server, inviting and using the Bot in other servers breaks the Term of Use.", icon_url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         await bot.send_message(message.channel, embed=em)
 
 @bot.command()
