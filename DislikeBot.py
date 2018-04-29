@@ -47,7 +47,7 @@ async def on_message(message):
 @bot.command()
 async def kick(member, reason):
     message = discord.Message
-    channel = await bot.get_channel(id='439865882789806080')
+    channel = bot.get_channel(id='439865882789806080')
     await bot.kick(member)
     await bot.say(f"**{message.author} kikced {member} for {reason}, Cya!**")
     await bot.send_message(channel, "**__USER__\t\t__MODERATOR__\t\t__Reason__\n"
