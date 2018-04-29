@@ -43,17 +43,6 @@ async def on_message(message):
         em.set_thumbnail(url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         em.set_footer(text="The Official Bot of Like Server, inviting and using the Bot in other servers breaks the Term of Use.", icon_url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         await bot.send_message(message.channel, embed=em)
-
-@bot.command()
-async def kick(member, reason):
-    message = discord.Message
-    channel = bot.get_channel(id='439865882789806080')
-    await bot.kick(member)
-    await bot.say(f"**{message.author} kikced {member} for {reason}, Cya!**")
-    await bot.send_message(channel, "**__USER__\t\t__MODERATOR__\t\t__Reason__\n"
-                           f"{member}\t\t{message.author}\t\t{reason}\n"
-                           "\n"
-                           f"Command with {bot.user.name}**")
         
 @bot.command()
 async def game(play):
