@@ -51,12 +51,10 @@ async def kick(member, reason):
     channel = await bot.get_channel(id='439865882789806080')
     await bot.kick(member)
     await bot.say("**{1} kikced {2} for {3}, Cya!**".format(message.author, member, reason)
-    em = discord.Embed(title="KICK", description="-------", colour=0x992d22)
-    em.set_author(name=message.author, icon_url=message.author.icon_url)
-    em.set_field(name="User", value=member)
-    em.set_field(name="Moderator", value=message.author)
-    em.set_field(name="Reason", value=reason)
-    await bot.send_message(channel, embed=em)
+    await bot.send_message(channel, "**__USER__\t\t__MODERATOR__\t\t__Reason__\n"
+                           f"{member}\t\t{message.author}\t\t{reason}\n"
+                           "\n"
+                           f"Command with {bot.user.name}**")
         
 @bot.command()
 async def game(play):
