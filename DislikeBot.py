@@ -49,7 +49,7 @@ async def on_message(message):
 async def kick(member, reason):
     channel = await bot.get_channel(id='439865882789806080')
     await bot.kick(member)
-    await bot.say("**{1} kikced {2} for {3}, cya {member!}**".format(message.author, member, reason)
+    await bot.say("**{1} kikced {2} for {3}, Cya!**".format(message.author, member, reason)
     em = discord.Embed(title=None, description=None, colour=0x992d22)
     em.set_author(name=message.author, icon_url=message.author.icon_url)
     em.set_field(name="User", value=member)
