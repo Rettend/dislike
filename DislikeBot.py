@@ -27,7 +27,12 @@ async def on_message(message):
     if message.content.startswith('d-say'):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
-    await bot.process_commands(message)
+    if message.content.upper().startswith('POLL'):
+        msg = await bot.send_message(message.channel, "**A Poll has started! -24 hours**")
+        await bot.add_reaction(msg, "\U0001F44D")
+        await bot.add_reaction(msg, "\U0001F44E")
+        await asyncio.sleep(86400)
+        await bot.send_message(message.channel, "**:alarm_clock: The Poll has ended**!")
     if message.content.startswith('d-list'):
         em = discord.Embed(title="COMMANDS:", description=":closed_book: d-say (something)\n"
                            ":white_small_square: Repeat what you said\n"
@@ -43,7 +48,9 @@ async def on_message(message):
         em.set_thumbnail(url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         em.set_footer(text="The Official Bot of Like Server, inviting and using the Bot in other servers breaks the Term of Use.", icon_url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         await bot.send_message(message.channel, embed=em)
-        
+        await bot.process_commands(message)
+
+
 @bot.command()
 async def game(play):
     await bot.change_presence(game=discord.Game(name=play))
