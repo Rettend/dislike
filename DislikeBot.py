@@ -24,6 +24,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    await bot.process_commands(message)
     if message.content.startswith('d-say'):
         args = message.content.split(' ')
         await bot.send_message(message.channel, '**%s**' % (' '.join(args[1:])))
@@ -48,7 +49,7 @@ async def on_message(message):
         em.set_thumbnail(url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         em.set_footer(text="The Official Bot of Like Server, inviting and using the Bot in other servers breaks the Term of Use.", icon_url="https://cdn.discordapp.com/emojis/440044660036206593.png?v=1")
         await bot.send_message(message.channel, embed=em)
-        await bot.process_commands(message)
+        
 
 
 @bot.command()
